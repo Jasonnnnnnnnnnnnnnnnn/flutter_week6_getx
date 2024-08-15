@@ -1,3 +1,7 @@
+
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -19,13 +23,21 @@ class HomeView extends GetView<HomeController> {
             itemCount: controller.todoService.todos.length,
             itemBuilder: (context, index) {
               final todo = controller.todoService.todos[index];
-              return ListTile(
-                title: Text(todo.title),
-                subtitle: Text(todo.description),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    controller.removeTodoAt(index);
+              return Ink(
+                color: todo.isDone? Colors.red: Colors.transparent,
+                child: ListTile(
+                  title: Text(todo.title),
+                  subtitle: Text(todo.description),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    
+                    onPressed: () {
+                      controller.removeTodoAt(index);
+                    },
+                  ),
+                  onLongPress: () {
+                    controller.toggleTodoStatus(index);
+                    log('${todo.isDone}');
                   },
                 ),
               );

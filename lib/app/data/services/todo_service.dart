@@ -17,6 +17,7 @@ class TodoService extends GetxService {
 
   void toggleTodoStatus(int index) {
     todos[index].isDone = !todos[index].isDone;
+    todos.refresh();
   }
 
 }
