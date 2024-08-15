@@ -8,7 +8,7 @@ class Todo {
   Todo({
     required this.title,
     required this.description,
-    required this.isDone,
+    this.isDone = false,
   });
   
 

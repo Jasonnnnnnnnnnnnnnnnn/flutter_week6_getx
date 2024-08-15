@@ -1,9 +1,23 @@
 import 'package:get/get.dart';
+import 'package:test_getx/app/data/services/todo_service.dart';
+import 'package:test_getx/app/data/todo.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final TodoService todoService = Get.find();
 
-  final count = 0.obs;
+  void addNewTodo() {
+    todoService
+        .addTodo(Todo(title: 'New Task', description: 'Task Description'));
+  }
+
+  void toggleTodoStatus(int index) {
+    todoService.toggleTodoStatus(index);
+  }
+
+  void removeTodoAt(int index) {
+    todoService.removeTodoAt(index);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +32,4 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
