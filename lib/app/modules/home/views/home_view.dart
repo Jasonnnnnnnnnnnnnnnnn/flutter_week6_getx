@@ -24,12 +24,20 @@ class HomeView extends GetView<HomeController> {
                 subtitle: Text(todo.description),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.removeTodoAt(index);
+                  },
                 ),
               );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.addNewTodo();
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
