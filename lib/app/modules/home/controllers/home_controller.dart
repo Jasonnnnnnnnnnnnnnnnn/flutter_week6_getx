@@ -7,9 +7,19 @@ class HomeController extends GetxController {
   final TodoService todoService = Get.find();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+
+  final titleFocus = FocusNode();
+  
   void setEditTodo(Todo todo) {
     titleController.text = todo.title;
     descriptionController.text = todo.description;
+  }
+
+  
+
+  void clearForm() {
+    titleController.text = '';
+    descriptionController.text = '';
   }
 
   void addNewTodo() {
@@ -18,8 +28,12 @@ class HomeController extends GetxController {
   }
 
   void editTodo(int index) {
-    todoService.editTodo(index,Todo(
-        title: titleController.text, description: descriptionController.text));
+    todoService.editTodo(
+        index,
+        Todo(
+            title: titleController.text,
+            description: descriptionController.text));
+    clearForm();
   }
 
   void toggleTodoStatus(int index) {
@@ -37,11 +51,13 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
+    titleFocus.requestFocus();
     super.onReady();
   }
 
   @override
   void onClose() {
+    
     descriptionController.dispose();
     titleController.dispose();
     super.onClose();

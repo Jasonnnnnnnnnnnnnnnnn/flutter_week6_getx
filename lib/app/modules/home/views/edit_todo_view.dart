@@ -13,6 +13,8 @@ class EditTodoView extends StatelessWidget {
   EditTodoView({this.index, this.todo, Key? key}) : super(key: key) {
     if (this.todo != null) {
       controller.setEditTodo(todo!);
+    } else {
+      controller.clearForm();
     }
   }
 
@@ -27,6 +29,7 @@ class EditTodoView extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                focusNode: controller.titleFocus,
                   controller: controller.titleController,
                   decoration: InputDecoration(labelText: 'Title'),
                   validator: (value) {
@@ -39,6 +42,7 @@ class EditTodoView extends StatelessWidget {
                 height: 16,
               ),
               TextFormField(
+                
                   controller: controller.descriptionController,
                   decoration: InputDecoration(labelText: 'Description'),
                   validator: (value) {
