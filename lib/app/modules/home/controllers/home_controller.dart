@@ -1,9 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_getx/app/data/services/todo_service.dart';
 import 'package:test_getx/app/data/todo.dart';
 
 class HomeController extends GetxController {
   final TodoService todoService = Get.find();
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  void setEditTodo(Todo todo){
+    titleController.text = todo.title;
+    descriptionController.text = todo.description;
+  }
 
   void addNewTodo() {
     todoService
@@ -31,6 +38,8 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    descriptionController.dispose();
+    titleController.dispose();
     super.onClose();
   }
 }
