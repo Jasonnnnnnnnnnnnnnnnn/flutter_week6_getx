@@ -51,7 +51,16 @@ class EditTodoView extends StatelessWidget {
                 height: 16,
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()) {
+                      if(todo==null) {
+                        controller.addNewTodo();
+                      } else {
+                        controller.editTodo(index!);
+                      }
+                    }
+                    Get.back();
+                  },
                   child: (this.todo != null) ? Text('Edit') : Text('Add New'))
             ],
           )),

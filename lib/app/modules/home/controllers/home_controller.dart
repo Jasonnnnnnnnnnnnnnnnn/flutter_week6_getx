@@ -7,19 +7,23 @@ class HomeController extends GetxController {
   final TodoService todoService = Get.find();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  void setEditTodo(Todo todo){
+  void setEditTodo(Todo todo) {
     titleController.text = todo.title;
     descriptionController.text = todo.description;
   }
 
   void addNewTodo() {
-    todoService
-        .addTodo(Todo(title: 'New Task', description: 'Task Description'));
+    todoService.addTodo(Todo(
+        title: titleController.text, description: descriptionController.text));
+  }
+
+  void editTodo(int index) {
+    todoService.editTodo(index,Todo(
+        title: titleController.text, description: descriptionController.text));
   }
 
   void toggleTodoStatus(int index) {
     todoService.toggleTodoStatus(index);
-   
   }
 
   void removeTodoAt(int index) {
